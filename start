@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 
 set -e
 
@@ -9,7 +9,7 @@ main() {
     # if the container started with a proper --volume option
     if [ -e $SOCKET ]; then
         # starts a socat proxy from the Docker unix socket to the TCP port
-        socat -d -d TCP-LISTEN:${PORT},fork UNIX:${SOCKET}
+        exec socat -d -d TCP-LISTEN:${PORT},fork UNIX:${SOCKET}
     else
         # otherwise prints the correct command to stdout
         cat << EOF
@@ -19,6 +19,7 @@ main() {
             --name=docker-http-proxy \
             gcbartlett/docker-http-proxy
 EOF
+        exit 1
     fi
 }
 
