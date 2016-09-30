@@ -1,7 +1,7 @@
-FROM debian:jessie
-MAINTAINER Hortonworks
+FROM alpine
+MAINTAINER Gary Bartlett <Developer@GaryBartlett.com>
 
-RUN apt-get update && apt-get install -y socat
-COPY ./start /
+RUN apk add --no-cache socat
 
+COPY start /
 CMD ["/start"]
